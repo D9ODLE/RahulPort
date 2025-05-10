@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Raj Mohapatra | Machine Learning Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 180px;
+            transition: padding-top 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(44, 62, 80, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header.scrolled .header-content {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 20px;
+            align-items: center;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .profile-img-container {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .profile-img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 0;
+            margin-right: 15px;
+            border-width: 2px;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .header-text {
+            transition: all 0.3s ease;
+            overflow: hidden;
+            max-height: 500px;
+        }
+        
+        header.scrolled .header-text {
+            max-height: 50px;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled h1 {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            margin-right: 15px;
+            white-space: nowrap;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .tagline {
+            display: none;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            animation: fadeIn 2s ease;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .contact-info {
+            display: none;
+        }
+        
+        .contact-info-mini {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            margin-right: 20px;
+        }
+        
+        header.scrolled .contact-info-mini {
+            display: flex;
+        }
+        
+        .contact-info-mini span {
+            font-size: 0.8rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .social-links {
+            margin-top: 0;
+            gap: 10px;
+        }
+        
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        header.scrolled .social-link {
+            font-size: 1rem;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 15px 0 10px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill-item {
+            background-color: var(--light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .experience-item, .project-item, .certification-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .experience-item:last-child, .project-item:last-child, .certification-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .certification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .view-certificate {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-certificate:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .certificate-img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px solid #eee;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 160px;
+            }
+            
+            header.scrolled {
+                padding: 5px 0;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 30px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            header.scrolled h1 {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .contact-info-mini {
+                display: none !important;
+            }
+            
+            header.scrolled .social-links {
+                display: none;
+            }
+            
+            header.scrolled .header-content {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="mainHeader">
+        <div class="header-content">
+            <div class="profile-img-container">
+                <!-- Replace with your actual image path -->
+                <img src="prefessional me.jpg" alt="Rahul Raj Mohapatra" class="profile-img">
+            </div>
+            <div class="header-text">
+                <h1>Rahul Raj Mohapatra</h1>
+                <p class="tagline">Machine Learning | GENERATIVE AI | FULL STACK</p>
+                <div class="contact-info">
+                    <span><i class="fas fa-map-marker-alt"></i> Bhubaneswar, Odisha</span>
+                    <span><i class="fas fa-envelope"></i> rahulraj8984@gmail.com</span>
+                    <span><i class="fas fa-phone"></i> +91-6370146659</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="contact-info-mini">
+                    <a href="mailto:rahulraj8984@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+916370146659" class="social-link"><i class="fas fa-phone"></i></a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/D9ODLE" class="social-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/rahul-raj-mohapatra-614489286/" class="social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link" title="Portfolio"><i class="fas fa-globe"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Rest of your content sections remain the same -->
+        <section id="profile">
+            <h2>Profile Summary</h2>
+            <p>Machine Learning enthusiast with a strong foundation in algorithms, data structures, and AI/ML frameworks. Passionate about developing data-driven solutions and deploying machine learning models to solve real-world problems. Skilled in optimizing models for accuracy, scalability, and performance. Experienced in collaborating on projects with Agile methodologies.</p>
+        </section>
+        
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill-item">Python</span>
+                <span class="skill-item">Javascript</span>
+                <span class="skill-item">Java</span>
+                <span class="skill-item">C++</span>
+                <span class="skill-item">Deep Learning</span>
+                <span class="skill-item">Generative AI</span>
+                <span class="skill-item">Data structures</span>
+                <span class="skill-item">Database</span>
+                <span class="skill-item">Blender/Unity</span>
+                <span class="skill-item">SQL</span>
+                <span class="skill-item">MongoDB</span>
+                <span class="skill-item">Linux/CLI</span>
+                <span class="skill-item">Networking</span>
+                <span class="skill-item">Tableau</span>
+                <span class="skill-item">PowerBi</span>
+                <span class="skill-item">FullStack</span>
+                <span class="skill-item">AWS</span>
+                <span class="skill-item">Prompt Engineering</span>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Machine Learning Intern</h3>
+                <p class="date">InternPe | Oct 2024 - Nov 2024</p>
+                <ul>
+                    <li>Developed and deployed machine learning models to analyze patient health records for diabetes prediction.</li>
+                    <li>Improved model accuracy by 85%, using feature engineering and hyperparameter tuning.</li>
+                    <li>Automated data preprocessing workflows, reducing processing time by 30%.</li>
+                    <li>Collaborated with a team of 3 engineers to implement end-to-end ML pipelines.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-item">
+                <h3>Handwritten Odia Language Recognition</h3>
+                <ul>
+                    <li>Developed a deep learning model based on the AlexNet architecture to recognize handwritten Odia characters, including 41 consonants and 11 vowels.</li>
+                    <li>Designed and curated a custom dataset of 52 classes, comprising 5,000+ images of handwritten Odia characters, manually collected and labeled for training and testing.</li>
+                    <li>Achieved over 95% accuracy on the test set using advanced training techniques like early stopping to prevent overfitting.</li>
+                    <li>Demonstrated potential for digitizing historical Odia manuscripts, enhancing OCR systems for regional languages, and building assistive technologies for visually impaired individuals.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="education">
+            <h2>Education</h2>
+            <h3>Bachelor of Technology, Computer Science</h3>
+            <p class="date">Centurion University | Expected Graduation: July 2026</p>
+        </section>
+
+        
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="certification-item">
+                <div>
+                    <h3>Machine Learning Specialization</h3>
+                    <p>Internpe</p>
+                </div>
+                <button class="view-certificate" onclick="openModal('INTERNPE.png', 'InternPe')">View Certificate</button>
+            </div>
+            <div class="certification-item">
+                <div>
+                    <h3>Young Professional</h3>
+                    <p>TCS ION</p>
+                </div>
+                <button class="view-certificate" onclick="openModal('tcsion.png', 'Young Professional')">View Certificate</button>
+            </div>
+            <div class="certification-item">
+                <div>
+                    <h3>Data analysis career essentials</h3>
+                    <p>Microsoft/Linkedin learning</p>
+                </div>
+                <button class="view-certificate" onclick="openModal('LinkedIn learning.png', 'Data Analysis Career Essentials')">View Certificate</button>
+            </div>
+            <div class="certification-item">
+                <div>
+                    <h3>Data analysis & Visualisation</h3>
+                    <p>Forage Accenture</p>
+                </div>
+                <button class="view-certificate" onclick="openModal('accentureforage.png', 'Data Analysis Career Essentials')">View Certificate</button>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal for certificates -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Certificate</h3>
+            <img id="modal-image" src="" alt="Certificate" class="certificate-img">
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Rahul Raj Mohapatra. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Certificate modal functions
+        function openModal(imageSrc, title) {
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            
+            modal.style.display = 'flex';
+            modalImg.src = imageSrc;
+            modalTitle.textContent = title;
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('certificateModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside the content
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('certificateModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                document.body.style.paddingTop = '60px';
+            } else {
+                header.classList.remove('scrolled');
+                document.body.style.paddingTop = '180px';
+            }
+        });
+    </script>
+</body>
+</html>
