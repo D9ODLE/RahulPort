@@ -217,6 +217,42 @@
             background: rgba(255, 255, 255, 0.2);
         }
         
+        .theme-toggle {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+        
+        header.scrolled .theme-toggle {
+            font-size: 1rem;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .theme-toggle:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        header.scrolled .theme-icon {
+            width: 16px;
+            height: 16px;
+        }
+        
         .header-right {
             display: flex;
             align-items: center;
@@ -433,6 +469,17 @@
             header.scrolled .header-content {
                 padding: 0 10px;
             }
+            
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+            
+            .theme-icon {
+                width: 16px;
+                height: 16px;
+            }
         }
     </style>
 </head>
@@ -440,7 +487,6 @@
     <header id="mainHeader">
         <div class="header-content">
             <div class="profile-img-container">
-                <!-- Replace with your actual image path -->
                 <img src="prefessional me.jpg" alt="Rahul Raj Mohapatra" class="profile-img">
             </div>
             <div class="header-text">
@@ -461,13 +507,15 @@
                     <a href="https://github.com/D9ODLE" class="social-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/rahul-raj-mohapatra-614489286/" class="social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                     <a href="#" class="social-link" title="Portfolio"><i class="fas fa-globe"></i></a>
+                    <a href="Portfolio.html" class="theme-toggle" title="Dark Mode">
+                        <img src="darkmodebutton.png" alt="Dark Mode" class="theme-icon">
+                    </a>
                 </div>
             </div>
         </div>
     </header>
     
     <div class="container">
-        <!-- Rest of your content sections remain the same -->
         <section id="profile">
             <h2>Profile Summary</h2>
             <p>Machine Learning enthusiast with a strong foundation in algorithms, data structures, and AI/ML frameworks. Passionate about developing data-driven solutions and deploying machine learning models to solve real-world problems. Skilled in optimizing models for accuracy, scalability, and performance. Experienced in collaborating on projects with Agile methodologies.</p>
@@ -529,7 +577,6 @@
             <h3>Bachelor of Technology, Computer Science</h3>
             <p class="date">Centurion University | Expected Graduation: July 2026</p>
         </section>
-
         
         <section id="certifications">
             <h2>Certifications</h2>
@@ -549,31 +596,31 @@
             </div>
             <div class="certification-item">
                 <div>
-                    <h3>Data analysis career essentials</h3>
-                    <p>Microsoft/Linkedin learning</p>
+                    <h3>Data Analysis Career Essentials</h3>
+                    <p>Microsoft/LinkedIn Learning</p>
                 </div>
                 <button class="view-certificate" onclick="openModal('LinkedIn learning.png', 'Data Analysis Career Essentials')">View Certificate</button>
             </div>
             <div class="certification-item">
                 <div>
-                    <h3>Data analysis & Visualisation</h3>
+                    <h3>Data Analysis & Visualisation</h3>
                     <p>Forage Accenture</p>
                 </div>
-                <button class="view-certificate" onclick="openModal('accentureforage.png', 'Data Analysis Career Essentials')">View Certificate</button>
+                <button class="view-certificate" onclick="openModal('accentureforage.png', 'Data Analysis & Visualisation')">View Certificate</button>
             </div>
             <div class="certification-item">
                 <div>
                     <h3>AWS Certified Solution Architect</h3>
                     <p>Amazon Web Services - Forage</p>
                 </div>
-                <button class="view-certificate" onclick="openModal('Forage AWS ra.png', 'Data Analysis Career Essentials')">View Certificate</button>
+                <button class="view-certificate" onclick="openModal('Forage AWS ra.png', 'AWS Certified Solution Architect')">View Certificate</button>
             </div>
             <div class="certification-item">
                 <div>
                     <h3>Software Technology Job Simulation</h3>
-                    <p>Electronic Art</p>
+                    <p>Electronic Arts</p>
                 </div>
-                <button class="view-certificate" onclick="openModal('EA.png', 'Data Analysis Career Essentials')">View Certificate</button>
+                <button class="view-certificate" onclick="openModal('EA.png', 'Software Technology Job Simulation')">View Certificate</button>
             </div>
         </section>
     </div>
@@ -581,14 +628,14 @@
     <!-- Modal for certificates -->
     <div class="modal" id="certificateModal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeModal()">×</span>
             <h3 id="modal-title">Certificate</h3>
             <img id="modal-image" src="" alt="Certificate" class="certificate-img">
         </div>
     </div>
     
     <footer>
-        <p>&copy; 2024 Rahul Raj Mohapatra. All rights reserved.</p>
+        <p>© 2024 Rahul Raj Mohapatra. All rights reserved.</p>
     </footer>
     
     <script>
