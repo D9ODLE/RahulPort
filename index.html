@@ -13,6 +13,10 @@
             --light: #ecf0f1;
             --dark: #2c3e50;
             --gray: #95a5a6;
+            --dark-bg: #1a1a1a;
+            --dark-text: #e0e0e0;
+            --dark-card-bg: #2a2a2a;
+            --dark-border: #444444;
         }
         
         * {
@@ -26,8 +30,13 @@
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
-            padding-top: 180px;
-            transition: padding-top 0.3s ease;
+            padding-top: 220px; /* Increased to account for full header height */
+            transition: background-color 0.5s ease, color 0.5s ease, padding-top 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
         
         .container {
@@ -113,7 +122,6 @@
         
         .header-text {
             transition: all 0.3s ease;
-            overflow: hidden;
             max-height: 500px;
         }
         
@@ -218,39 +226,64 @@
         }
         
         .theme-toggle {
-            color: white;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            width: 60px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 34px;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            justify-content: space-between;
+            padding: 0 5px;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
         
         header.scrolled .theme-toggle {
-            font-size: 1rem;
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 26px;
         }
         
-        .theme-toggle:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
+        .theme-toggle input {
+            display: none;
+        }
+        
+        .slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        header.scrolled .slider {
+            width: 18px;
+            height: 18px;
+            top: 4px;
+            left: 4px;
+        }
+        
+        .theme-toggle input:checked + .slider {
+            transform: translateX(26px);
+        }
+        
+        header.scrolled .theme-toggle input:checked + .slider {
+            transform: translateX(20px);
         }
         
         .theme-icon {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             object-fit: contain;
+            margin: 0 5px;
         }
         
         header.scrolled .theme-icon {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
         }
         
         .header-right {
@@ -264,7 +297,16 @@
             padding: 30px;
             margin: 30px 0;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+            position: relative; /* Ensure section is positioned relative to avoid overlap */
+            z-index: 1; /* Lower than header to avoid being hidden */
+            opacity: 1; /* Ensure section is always visible */
+            visibility: visible; /* Ensure section is not hidden */
+        }
+        
+        body.dark-mode section {
+            background-color: var(--dark-card-bg);
+            border: 1px solid var(--dark-border);
         }
         
         section:hover {
@@ -272,11 +314,20 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
+        body.dark-mode section:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
         h2 {
             color: var(--primary);
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+        
+        body.dark-mode h2 {
+            color: var(--secondary);
         }
         
         h2::after {
@@ -292,6 +343,11 @@
         h3 {
             color: var(--secondary);
             margin: 15px 0 10px;
+            transition: color 0.5s ease;
+        }
+        
+        body.dark-mode h3 {
+            color: var(--dark-text);
         }
         
         .skills-container {
@@ -308,6 +364,11 @@
             transition: all 0.3s ease;
         }
         
+        body.dark-mode .skill-item {
+            background-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        
         .skill-item:hover {
             background-color: var(--secondary);
             color: white;
@@ -318,6 +379,13 @@
             margin-bottom: 25px;
             padding-bottom: 20px;
             border-bottom: 1px solid #eee;
+            transition: border-color 0.5s ease;
+        }
+        
+        body.dark-mode .experience-item,
+        body.dark-mode .project-item,
+        body.dark-mode .certification-item {
+            border-bottom: 1px solid var(--dark-border);
         }
         
         .experience-item:last-child, .project-item:last-child, .certification-item:last-child {
@@ -330,6 +398,11 @@
             color: var(--gray);
             font-size: 0.9rem;
             margin-bottom: 10px;
+            transition: color 0.5s ease;
+        }
+        
+        body.dark-mode .date {
+            color: var(--gray);
         }
         
         ul {
@@ -357,9 +430,17 @@
             transition: all 0.3s ease;
         }
         
+        body.dark-mode .view-certificate {
+            background-color: var(--secondary);
+        }
+        
         .view-certificate:hover {
             background-color: var(--primary);
             transform: translateY(-2px);
+        }
+        
+        body.dark-mode .view-certificate:hover {
+            background-color: var(--accent);
         }
         
         .modal {
@@ -372,7 +453,7 @@
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
-            z-index: 1000;
+            z-index: 1001; /* Higher than header to ensure modal is visible */
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease;
@@ -388,6 +469,11 @@
             overflow-y: auto;
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.5s ease;
+        }
+        
+        body.dark-mode .modal-content {
+            background-color: var(--dark-card-bg);
         }
         
         .close-modal {
@@ -400,6 +486,10 @@
             transition: color 0.3s ease;
         }
         
+        body.dark-mode .close-modal {
+            color: var(--dark-text);
+        }
+        
         .close-modal:hover {
             color: var(--accent);
         }
@@ -410,6 +500,11 @@
             border-radius: 5px;
             margin-top: 15px;
             border: 1px solid #eee;
+            transition: border-color 0.5s ease;
+        }
+        
+        body.dark-mode .certificate-img {
+            border: 1px solid var(--dark-border);
         }
         
         footer {
@@ -417,6 +512,13 @@
             padding: 20px;
             color: var(--gray);
             font-size: 0.9rem;
+            transition: color 0.5s ease;
+            position: relative;
+            z-index: 1; /* Ensure footer is not hidden by header */
+        }
+        
+        body.dark-mode footer {
+            color: var(--dark-text);
         }
         
         @keyframes fadeIn {
@@ -426,7 +528,7 @@
         
         @media (max-width: 768px) {
             body {
-                padding-top: 160px;
+                padding-top: 200px; /* Adjusted for smaller screens */
             }
             
             header.scrolled {
@@ -471,14 +573,22 @@
             }
             
             .theme-toggle {
-                width: 32px;
-                height: 32px;
-                font-size: 1rem;
+                width: 48px;
+                height: 26px;
+            }
+            
+            .slider {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .theme-toggle input:checked + .slider {
+                transform: translateX(20px);
             }
             
             .theme-icon {
-                width: 16px;
-                height: 16px;
+                width: 14px;
+                height: 14px;
             }
         }
     </style>
@@ -507,9 +617,13 @@
                     <a href="https://github.com/D9ODLE" class="social-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/rahul-raj-mohapatra-614489286/" class="social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                     <a href="#" class="social-link" title="Portfolio"><i class="fas fa-globe"></i></a>
-                    <a href="Portfolio.html" class="theme-toggle" title="Dark Mode">
-                        <img src="darkmodebutton.png" alt="Dark Mode" class="theme-icon">
-                    </a>
+                    <label class="theme-toggle" title="Toggle Dark Mode">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider">
+                            <img src="darkmodebutton.png" alt="Light Mode" class="theme-icon sun-icon" style="display: block;">
+                            <img src="darkmodebutton.png" alt="Dark Mode" class="theme-icon moon-icon" style="display: none;">
+                        </span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -585,18 +699,8 @@
                     <h3>Machine Learning Specialization</h3>
                     <p>Internpe</p>
                 </div>
-                <button class="view-certificate" onclick="openModal('INTERNPE.png', 'InternPe')">View Certificate</button>
+                <button class="view-certificate" onclick="openModal('INTERNPE.png', 'Machine Learning Specialization')">View Certificate</button>
             </div>
-            <div class="certification-item">
-                <div>
-                    <h3>Full Stack Development</h3>
-                    <p>Infosys Springboard</p>
-                </div>
-                <button class="view-certificate" onclick="openModal('infosys.png', 'Software Technology Job Simulation')">View Certificate</button>
-             </div>
-
-
-
             <div class="certification-item">
                 <div>
                     <h3>Young Professional</h3>
@@ -632,8 +736,6 @@
                 </div>
                 <button class="view-certificate" onclick="openModal('EA.png', 'Software Technology Job Simulation')">View Certificate</button>
             </div>
-
-
         </section>
     </div>
     
@@ -687,13 +789,50 @@
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('mainHeader');
+            const profileSection = document.getElementById('profile');
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
-                document.body.style.paddingTop = '60px';
+                document.body.style.paddingTop = '80px'; /* Adjusted for scrolled header height */
+                profileSection.style.opacity = '1';
+                profileSection.style.visibility = 'visible';
             } else {
                 header.classList.remove('scrolled');
-                document.body.style.paddingTop = '180px';
+                document.body.style.paddingTop = '220px'; /* Adjusted for full header height */
+                profileSection.style.opacity = '1';
+                profileSection.style.visibility = 'visible';
             }
+        });
+        
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        const profileSection = document.getElementById('profile');
+        
+        // Load saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.checked = true;
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+            profileSection.style.opacity = '1';
+            profileSection.style.visibility = 'visible';
+        }
+        
+        themeToggle.addEventListener('change', function() {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+            profileSection.style.opacity = '1';
+            profileSection.style.visibility = 'visible';
         });
     </script>
 </body>
